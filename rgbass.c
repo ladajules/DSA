@@ -33,7 +33,7 @@ void insert(Node **hashTable, Color color) {
     int index = RGB(color.RGBval);
 
     if (!hashTable[index]) {
-        hashTable[index] = newNode; // insert at head if head is null
+        hashTable[index] = newNode; // insert at head if head is null try try try 
     } else {
         Node *temp = hashTable[index]; // insert at last
         while(temp->next) { temp = temp->next; }
