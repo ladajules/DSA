@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define LIST_SIZE 64
 
@@ -40,17 +41,21 @@ void insert(Node **hashTable, Color color) {
     }
 }
 
-void delete (Node **hashTable, Color color) {
+void deleteYo(Node **hashTable, Color color) {
     int index = RGB(color.RGBval);
     
+    if (hashTable[index] == NULL) return;
+    
     Node *temp = hashTable[index];
-    if (temp = hashTable[index]) {
-        free(temp);
+    if (strcmp(hashTable[index]->color.colorName, color.colorName) == 0) {
+        Node *toDel = hashTable[index];
+        hashTable[index] = hashTable[index]->next;
+        free(toDel);
     } else {
-        while (temp->next && strcmp(temp->next->color.colorName, color.colorName) != 0) {
-            temp = temp->next;
-        }
-        
+        while (temp->next && strcmp(temp->next->color.colorName, color.colorName) != 0) { temp = temp->next; }
+        Node *toDel = temp->next;
+        temp->next = toDel->next;
+        free(toDel);
     }
 }
 
@@ -70,7 +75,7 @@ int main() {
     Color trial = {"Try", {0, 32, 255}}; // try to chain
     insert(hashTable, trial);
 
-    for (int i = 0; i < LIST_SIZE; i++) {
+    for (int i = 0; i < LIST_SIZE; i++) { // dishplay
         if (hashTable[i] == NULL) { 
             printf("NULL\n");
         } else {
@@ -82,6 +87,8 @@ int main() {
             printf("NULL\n");
         }
     }
+    
+    deleteYo(hashTable, colors[0]); // works yo
 
     return 0;
 }
