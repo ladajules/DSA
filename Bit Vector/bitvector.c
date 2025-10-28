@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define SIZE 4
-#define WORDSIZE (sizeof(unsigned int) * 8)
+#define SIZE 4 // how many words in a set 
+#define WORDSIZE (sizeof(unsigned int) * 8) // size of the set in BITS because sizeof returns in BYTES. To make it into BITS you have to multiply by 8
 typedef unsigned int *SET;
 
 SET set_union(SET A, SET B) {
