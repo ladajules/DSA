@@ -27,6 +27,19 @@ void markAbsent(Set *s, int id) {
     if (id < MAX ) s->attendance[id].bit = false;
 }
 
+Set completeAttendance(Set a, Set b) {
+    Set c; initSet(&c);
+    for (int i = 0; i < MAX; i++) {
+       c.attendance[i].bit = a.attendance[i].bit || b.attendance[i].bit;
+       if (c.attendance[i].bit && a.attendance[i].bit) {
+        strcpy(c.attendance[i].name, a.attendance[i].name);
+       } else if (c.attendance[i].bit && b.attendance[i].bit) {
+        strcpy(c.attendance[i].name, b.attendance[i].name);
+       }
+    }
+    return c;
+}
+
 Set commonAttendance(Set a, Set b) {
     Set c; initSet(&c);
     for (int i = 0; i < MAX; i++) {
@@ -65,6 +78,9 @@ int main() {
 
     result = commonAttendance(classA, classB);
     printf("Students who attended both: "); displayAttendance(result);
+
+    result = completeAttendance(classA, classB);
+    printf("Students who were present today: "); displayAttendance(result);
 
     return 0;
 }
